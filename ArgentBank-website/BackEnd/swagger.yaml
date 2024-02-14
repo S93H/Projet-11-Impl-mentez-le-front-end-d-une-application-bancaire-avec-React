@@ -1,0 +1,378 @@
+swagger: '2.0'
+info:
+  title: Bank Argent API documentation
+  description: Contains all available API endpoints in this codebase
+  version: '1.0.0'
+  termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /user/login:
+    post:
+      tags:
+        - User Module
+      summary: Login
+      description: API for Login
+      parameters:
+        - in: body
+          name: body
+          description: Login Payload
+          required: true
+          schema:
+            $ref: '#/definitions/Login'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Login Successfully
+          schema:
+            $ref: '#/definitions/LoginResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/signup:
+    post:
+      tags:
+        - User Module
+      summary: Signup
+      description: API for Signup
+      parameters:
+        - in: body
+          name: body
+          description: Signup Payload
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Signup Successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/profile:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - User Module
+      summary: User Profile API
+      description: API for fetching a user profile
+      #produces:
+       # - application/json
+      responses:
+        '200':
+          description: User profile retrieved successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - User Module
+      summary: User Profile API
+      description: API for updating a user profile
+      parameters:
+        - in: body
+          name: body
+          description: Update user profile attributes
+          required: true
+          schema:
+            $ref: '#/definitions/UserProfile'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User profile retrieved successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  User:
+    properties:
+      email:
+        type: string
+        description: user email
+      password:
+        type: string
+        description: user password
+      firstName:
+        type: string
+        description: user first name
+      lastName:
+        type: string
+        description: user last name
+      userName:
+        type: string
+        description: user public name
+  Login:
+    properties:
+      email:
+        type: string
+        description: user email
+      password:
+        type: string
+        description: user password
+  ApiResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: object
+        properties:
+          id:
+            type: string
+          email:
+            type: string
+  LoginResponse:
+    type: object
+    properties:
+      token:
+        type: string
+  UserProfile:
+    type: object
+    properties:
+      userName:
+        type: string
+
+
+
+
+
+#--------------------- Transaction ------------------------#
+
+swagger: '2.0'
+info:
+  title: Bank Argent API documentation
+  description: Contains all available API endpoints in this codebase
+  version: '1.0.0'
+  termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /transactions:
+    get:
+      tags:
+        - Transaction Module
+      summary: Get All Transactions
+      description: Retrieve a list of all transactions
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/TransactionList'
+        '500':
+          description: Internal Server Error
+  /transactions/{id}:
+    get:
+      tags:
+        - Transaction Module
+      summary: Get Transaction Details
+      description: Retrieve details of a specific transaction
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/TransactionDetail'
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+        - Transaction Module
+      summary: Update Transaction Details
+      description: Update category and notes of a specific transaction
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Update transaction details
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionUpdate'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction details updated successfully
+          schema:
+            $ref: '#/definitions/TransactionDetail'
+        '400':
+          description: Invalid Fields
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+
+definitions:
+  Transaction:
+    properties:
+      balance:
+        type: number
+        description: Transaction balance
+      description:
+        type: string
+        description: Transaction description
+      date:
+        type: string
+        format: date
+        description: Transaction date
+  TransactionList:
+    type: array
+    items:
+      $ref: '#/definitions/Transaction'
+  TransactionDetail:
+    type: object
+    properties:
+      id:
+        type: string
+      balance:
+        type: number
+      description:
+        type: string
+      date:
+        type: string
+        format: date
+      category:
+        type: string
+      notes:
+        type: string
+  TransactionUpdate:
+    type: object
+    properties:
+      category:
+        type: string
+      notes:
+        type: string
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# -------------------- Transaction première tentative -----------------------------
+
+# swagger: '2.0'
+# info:
+#   title: Bank Argent API documentation
+#   description: Contains all available API endpoints in this codebase
+#   version: '1.0.0'
+#   termsOfService: 'http://swagger.io/terms/'
+# host: localhost:3001
+# basePath: /api/v1
+# schemes:
+#   - http
+# paths:
+#   /transactions:
+#     get:
+#       tags:
+#         - Transaction Module
+#       summary: Get All Transactions
+#       description: Retrieve a list of all transactions
+#       produces:
+#         - application/json
+#       responses:
+#         '200':
+#           description: Successful operation
+#           schema:
+#             $ref: '#/definitions/TransactionList'
+#         '500':
+#           description: Internal Server Error
+
+#     post:
+#       tags:
+#         - Transaction Module
+#       summary: Create Transaction
+#       description: Create a new transaction
+#       parameters:
+#         - in: body
+#           name: body
+#           description: Transaction Payload
+#           required: true
+#           schema:
+#             $ref: '#/definitions/Transaction'
+#       produces:
+#         - application/json
+#       responses:
+#         '201':
+#           description: Transaction created successfully
+#           schema:
+#             $ref: '#/definitions/Transaction'
+#         '400':
+#           description: Invalid Fields
+#         '500':
+#           description: Internal Server Error
+
+# definitions:
+#   Transaction:
+#     properties:
+#       amount:
+#         type: number
+#         description: Transaction amount
+#       description:
+#         type: string
+#         description: Transaction description
+#       date:
+#         type: string
+#         format: date
+#         description: Transaction date
+
+#   TransactionList:
+#     type: array
+#     items:
+#       $ref: '#/definitions/Transaction'
+
