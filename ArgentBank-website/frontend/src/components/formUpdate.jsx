@@ -20,13 +20,8 @@ function FormUpdateUsername() {
     // Je vérifie si l'utilisateur et son ID sont définis
     if (!user) {
       console.error('User or user ID is not defined. Redirecting to login page...');
-      console.log('User:', user);
       return;
     }
-
-    console.log('Submitting update username form');
-    console.log('User ID:', user.id);
-    console.log('New Username:', newUsername);
 
     try {
       await dispatch(updateUsername(newUsername));

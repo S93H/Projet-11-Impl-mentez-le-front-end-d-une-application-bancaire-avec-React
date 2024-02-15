@@ -8,15 +8,11 @@ import argentBankLogo from '../assets/argentBankLogo.png'
 function Nav() {
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user); // J'ajoute la récupération de l'utilisateur
-  console.log(user);
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
     dispatch(logoutUser());
   };
-
-  console.log('User in Nav:', user); // J'ajoute du journal pour le débogage
-
 
   return (
     <nav className="main-nav">

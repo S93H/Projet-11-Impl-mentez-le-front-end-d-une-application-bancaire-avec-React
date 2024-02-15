@@ -30,21 +30,16 @@ const [authenticationError, setAuthenticationError] = useState(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    console.log('Start handleLogin');
   
     // Je vérifie si les champs sont vides
     if (!formData.email || !formData.password) {
-      console.log('Empty Fields Error');
       setEmptyFieldsError('Veuillez renseigner tous les champs.');
       setAuthenticationError(null);
       return;
     }
   
     try {
-      console.log('Before dispatch login');
       await dispatch(loginUser(formData.email, formData.password));
-      console.log('After dispatch login');
   
       // J'efface les erreurs si la connexion réussit
       setEmptyFieldsError(null);
@@ -73,8 +68,6 @@ const [authenticationError, setAuthenticationError] = useState(null);
   
 
   useEffect(() => {
-    console.log('Token:', token);
-    console.log('Location Pathname:', window.location.pathname);
     if (token && window.location.pathname !== '/user') {
       // J'utilise useNavigate pour rediriger vers /user
       navigate('/user');

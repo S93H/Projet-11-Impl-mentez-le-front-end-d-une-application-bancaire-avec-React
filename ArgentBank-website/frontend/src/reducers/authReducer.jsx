@@ -17,8 +17,6 @@ const authSlice = createSlice({
       state.error = null;
     },
     loginUserSuccess: (state, action) => {
-      console.log('API Response:', action.payload);
-      console.log('API Response Body:', action.payload.body);
       state.user = {
         ...action.payload.user,
         username: action.payload.user.userName,
@@ -26,11 +24,6 @@ const authSlice = createSlice({
       };
       state.loading = false;
       state.token = action.payload.token;
-
-      console.log('User details in loginUserSuccess:', state.user);
-      console.log('User ID in loginUserSuccess:', state.user.id);
-      console.log('User Username in loginUserSuccess:', state.user.username);
-      console.log('User FirstName in loginUserSuccess:', state.user.firstName);
 
       sessionStorage.setItem('token', action.payload.token);
     },
@@ -48,7 +41,6 @@ const authSlice = createSlice({
       state.error = null;
     },
     updateUsernameSuccess: (state, action) => {
-      console.log('Update username success:', action.payload);
       state.user.username = action.payload.username;
       if (action.payload.body && action.payload.body.id) {
         state.user.id = action.payload.body.id;
@@ -67,7 +59,6 @@ const authSlice = createSlice({
       state.error = null;
     },
     getUserProfileSuccess: (state, action) => {
-      console.log('User profile retrieved successfully:', action.payload);
       state.user = {
         ...action.payload.body,
         username: action.payload.body.userName,
@@ -136,7 +127,6 @@ export const updateUsername = (newUsername) => async (dispatch, getState) => {
       { userName: newUsername },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    console.log('Update username API response:', response.data);
     dispatch(updateUsernameSuccess(response.data));
 
   } catch (error) {
@@ -155,7 +145,6 @@ export const getUserProfile = () => async (dispatch, getState) => {
       { headers: { Authorization: `Bearer ${token}` } }
     );
 
-    console.log('API Response in getUserProfile:', response.data);
 
     dispatch(getUserProfileSuccess(response.data));
   } catch (error) {
