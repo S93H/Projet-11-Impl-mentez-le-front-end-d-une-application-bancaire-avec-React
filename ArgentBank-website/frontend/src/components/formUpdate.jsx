@@ -38,7 +38,8 @@ function FormUpdateUsername() {
   }
 
   return (
-    <div className='formUpdate'>
+    <div className='center'>
+      <div className='formUpdate'>
       {/* J'affiche le message de mise à jour réussie */}
       {updateSuccess && <h2 className="success-message">Votre username est maintenant "{newUsername}"</h2>}
 
@@ -63,6 +64,8 @@ function FormUpdateUsername() {
         </>
       )}
     </div>
+    </div>
+    
   );
 }
 
