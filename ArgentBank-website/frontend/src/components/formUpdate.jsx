@@ -45,6 +45,7 @@ function FormUpdateUsername() {
       {/* J'affiche le formulaire seulement si la mise à jour n'est pas réussie */}
       {!updateSuccess && (
         <>
+        <i className="fa fa-user-circle sign-in-icon"></i>
           <h2 className="success-message">Update Username</h2>
           <form onSubmit={handleUpdateUsername}>
             <div className="input-wrapper">
@@ -57,7 +58,7 @@ function FormUpdateUsername() {
               />
             </div>
 
-            <button type="submit">Update Username</button>
+            <button type="submit" id='updateButton'>Update Username</button>
           </form>
         </>
       )}

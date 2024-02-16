@@ -5,6 +5,7 @@ import securityIcon from '../assets/icon-security.png';
 
 function HomeMain() {
     return(
+      <div className='screen'>
         <main>
       <div className="hero">
         <section className="hero-content">
@@ -50,6 +51,8 @@ function HomeMain() {
         </div>
       </section>
     </main>
+      </div>
+        
     );
 }
 

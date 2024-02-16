@@ -295,6 +295,7 @@ body {
   .transaction-button {
     width: 200px;
   }
+  
 }
 
 .success-message {
@@ -349,7 +350,7 @@ body {
   background-color: white;
   color: black;
   width: 500px;
-  margin-left: 34%;
+  margin-left: 31%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -358,5 +359,15 @@ body {
 }
 
 .formUpdate h2 {
+  color: black;
+}
+
+.formUpdate button {
+  background-color: #00bc77;
+}
+
+#newUsername {
+  background-color: white;
+  border: 1px solid #12002b;
   color: black;
 }
