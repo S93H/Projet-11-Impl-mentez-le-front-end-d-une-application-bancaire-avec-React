@@ -6,6 +6,9 @@ function FormUpdateUsername() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
 
+   // J'ajoute un état pour gérer l'affichage du message d'erreur
+   const [usernameError, setUsernameError] = useState('');
+
   // J'utilise l'username actuel comme valeur initiale
   const [newUsername, setNewUsername] = useState(user?.username || '');
   const [updateSuccess, setUpdateSuccess] = useState(false); // Ajout du state pour suivre le succès de la mise à jour
@@ -16,6 +19,15 @@ function FormUpdateUsername() {
 
   const handleUpdateUsername = async (e) => {
     e.preventDefault();
+
+    // Je vérifie si le champ newUsername est vide
+    if (!newUsername.trim()) {
+      setUsernameError('Le champ du nom d\'utilisateur ne peut pas être vide.');
+      return;
+    }
+
+    // Je réinitialise le message d'erreur en cas de succès
+    setUsernameError('');
 
     // Je vérifie si l'utilisateur et son ID sont définis
     if (!user) {
@@ -40,6 +52,9 @@ function FormUpdateUsername() {
   return (
     <div className='center'>
       <div className='formUpdate'>
+         {/* J'affiche le message d'erreur dans le formulaire */}
+         {usernameError && <p className="error-message">{usernameError}</p>}
+         
       {/* J'affiche le message de mise à jour réussie */}
       {updateSuccess && <h2 className="success-message">Votre username est maintenant "{newUsername}"</h2>}
 
